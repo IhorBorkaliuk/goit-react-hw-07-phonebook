@@ -19,7 +19,7 @@ export function Form() {
   console.log(contacts)
   
   const hasAlreadyAdded = ({ name }) =>
-      contacts.items.find(el => el.name.toLowerCase() === name.toLowerCase());
+      contacts.find(el => el.name.toLowerCase() === name.toLowerCase());
 
   const handleChange = evt => {
     const { name, value } = evt.target;

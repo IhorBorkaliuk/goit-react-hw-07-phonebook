@@ -12,7 +12,7 @@ export function ContactList({ contacts }) {
       <ListItem key={id}>
         <LabelText>Name: {name}</LabelText>{' '}
         <LabelText>Number: {phone}</LabelText>
-        <Button type="button" onClick={() => dispatch(deleteContact(name))}>
+        <Button type="button" onClick={() => dispatch(deleteContact(id))}>
           Delete
         </Button>
       </ListItem>
@@ -24,7 +24,7 @@ export function ContactList({ contacts }) {
 
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
-    PropTypes.exact({
+    PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       phone: PropTypes.string.isRequired,
