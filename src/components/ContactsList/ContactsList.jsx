@@ -7,10 +7,10 @@ import { deleteOneContact } from 'redux/contactsSlice';
 export function ContactList({ contacts }) {
   const dispatch = useDispatch();
   console.log(contacts);
-  const item = contacts.map(({ name, number, id }) => {
+  const item = contacts.map(({ name, phone, id }) => {
     return (
       <ListItem key={id}>
-        <LabelText>Name: {name}</LabelText> <LabelText>Number: {number}</LabelText>
+        <LabelText>Name: {name}</LabelText> <LabelText>Number: {phone}</LabelText>
         <Button type="button" onClick={() => dispatch(deleteOneContact(name))}>
           Delete
         </Button>
@@ -26,7 +26,7 @@ ContactList.propTypes = {
     PropTypes.exact({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
+      phone: PropTypes.string.isRequired,
     }).isRequired
   ),
 };

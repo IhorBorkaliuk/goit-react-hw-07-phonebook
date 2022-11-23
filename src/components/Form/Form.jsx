@@ -3,8 +3,8 @@ import { ButtonForm } from './FormStyled';
 import { FormStyled, Text, Label, Input } from './FormStyled';
 import Notiflix from 'notiflix';
 import { useDispatch, useSelector } from 'react-redux';
-import { addOneContact } from 'redux/contactsSlice';
-import { getStatusContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 
 
 
@@ -12,32 +12,34 @@ import { getStatusContacts } from 'redux/selectors';
 
 export function Form() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('')
+  const [phone, setNumber] = useState('')
   const dispatch = useDispatch();
-  const contacts = useSelector(getStatusContacts);
+  const contacts = useSelector(selectContacts);
+
+  console.log(contacts)
   
   const hasAlreadyAdded = ({ name }) =>
-      contacts.find(el => el.name.toLowerCase() === name.toLowerCase());
+      contacts.items.find(el => el.name.toLowerCase() === name.toLowerCase());
 
   const handleChange = evt => {
     const { name, value } = evt.target;
     if (name === 'name') {
       setName(value)
     }
-    if (name === 'number') {
+    if (name === 'phone') {
       setNumber(value);
     }
   };
 
   const handleSubmit = evt => {
-    const contact = { name, number };
+    const contact = { name, phone };
     evt.preventDefault();
           if (hasAlreadyAdded(contact)) {
             Notiflix.Notify.info(`${contact.name} is already in contacts`);
             reset();
             return;
           }
-    dispatch(addOneContact(contact));
+    dispatch(addContact(contact));
     reset();
   };
 
@@ -68,8 +70,8 @@ export function Form() {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           type="tel"
-          name="number"
-          value={number}
+          name="phone"
+          value={phone}
           onChange={handleChange}
         />
       </Label>

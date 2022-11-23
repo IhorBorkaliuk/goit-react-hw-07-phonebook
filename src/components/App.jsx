@@ -3,16 +3,24 @@ import { Title } from './ContactsList/ContactsListStyled';
 import { Form } from './Form/Form';
 import { AppWrapper } from './ContactsList/ContactsListStyled';
 import { ContactList } from './ContactsList/ContactsList';
-import { getStatusContacts } from 'redux/selectors';
-import { getStatusFilter } from 'redux/selectors';
-import { useSelector } from 'react-redux';
+import { selectContacts } from 'redux/selectors';
+import { selectFilter } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/operations';
+import { useEffect } from 'react';
 import { Notify } from 'services/Notify';
 
 
 
 export function App() {
-  const filter = useSelector(getStatusFilter);
-  const contacts = useSelector(getStatusContacts);
+  const filter = useSelector(selectFilter);
+  const contacts = useSelector(selectContacts);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      dispatch(fetchContacts());
+    }, [dispatch]);
 
   const getFilteredContacts = (filter, contacts) => {
         if (!filter) {
