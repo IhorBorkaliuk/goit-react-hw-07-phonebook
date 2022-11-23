@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, List, ListItem, LabelText } from './ContactsListStyled';
 import { useDispatch } from 'react-redux';
-import { deleteOneContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 
 export function ContactList({ contacts }) {
   const dispatch = useDispatch();
@@ -10,8 +10,9 @@ export function ContactList({ contacts }) {
   const item = contacts.map(({ name, phone, id }) => {
     return (
       <ListItem key={id}>
-        <LabelText>Name: {name}</LabelText> <LabelText>Number: {phone}</LabelText>
-        <Button type="button" onClick={() => dispatch(deleteOneContact(name))}>
+        <LabelText>Name: {name}</LabelText>{' '}
+        <LabelText>Number: {phone}</LabelText>
+        <Button type="button" onClick={() => dispatch(deleteContact(name))}>
           Delete
         </Button>
       </ListItem>
