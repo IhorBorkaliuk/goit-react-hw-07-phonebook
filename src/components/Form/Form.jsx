@@ -35,7 +35,7 @@ export function Form() {
     const contact = { name, phone };
     evt.preventDefault();
           if (hasAlreadyAdded(contact)) {
-            Notiflix.Notify.info(`${contact.name} is already in contacts`);
+            Notiflix.Notify.warning(`${contact.name} is already in contacts`);
             reset();
             return;
           }

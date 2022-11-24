@@ -8,6 +8,7 @@ import { contactsFilter } from 'redux/filterSlice';
 
 
 
+
 export const Filter = () => {
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter)
@@ -36,7 +37,7 @@ export const Filter = () => {
         Find contacts by name
         <InputFilter type="text" value={filter} onChange={handleChange} />
       </LabelFilter>
-      <ContactList contacts={filteredContacts} />
+      {contacts && <ContactList contacts={filteredContacts} />}
     </Wrapper>
   );
 }
